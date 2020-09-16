@@ -3,9 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Carrito de compras en Vue.js</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link rel="stylesheet" href="https://unpkg.com/buefy/dist/buefy.min.css">
+
+
+
 </head>
 <body>
+
+
+<div>
+    <section class="hero is-dark">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">
+                Carrito de compras
+            </h1>
+            <h2 class="subtitle">
+                Desarrollado en Vue.js 
+           </h2>
+          </div>
+        </div>
+      </section>
+</div>
+
+<div id="app" class="container">
+  <br>
+    <!--
+      https://vuejs.org/v2/guide/list.html#Mapping-an-Array-to-Elements-with-v-for
+    -->
+    <!-- https://vuejs.org/v2/guide/syntax.html#v-on-Shorthand -->
+<nav class="level">
+    <div class="level-item has-text-centered" v-for="product in products" :key="product.id" class="product">
+        <div>
+        <p class="title">{{ product.name }}</p><br>
+        <p class="subtitle">{{ product.description }}</p><br>
+        <div>
+          <button
+            @click="updateCart(product, 'subtract')"
+            class="cart__button"
+          >
+            -
+          </button>
+          <span class="cart__quantity">{{ product.quantity }}</span>
+          <button
+            @click="updateCart(product, 'add')"
+            class="cart__button"
+          >
+            +
+          </button>
+    </div>
+</div>
+</nav>
+
+
+<nav class="level">
+    <div class="level-item has-text-centered">
+        <b-button @click="showCart = !showCart">
+          Checkout <i class="fas fa-shopping-cart"></i> {{ totalQuantity }}
+        </b-button>
+    </div>
+</nav>
+<nav class="level">
+        <div v-if="showCart" class="level-item has-text-centered">
+          <ul>
+            <li
+              v-for="product in cart"
+              :key="product.id"
+            >
+              {{ product.name }} ({{ product.quantity }})
+            </li>
+          </ul>
+        </div>
+</nav>
+    
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/buefy/dist/buefy.min.js"></script>
+  <script src="app.js"></script>
+
+
+  
     
 </body>
 </html>
